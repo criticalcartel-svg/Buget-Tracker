@@ -1,21 +1,15 @@
-import {
-  useState,
-  type BaseSyntheticEvent,
-  type ComponentPropsWithoutRef,
-} from "react";
+import { type ComponentPropsWithoutRef } from "react";
+import Options from "./Options";
+import useFormContext from "../context/FormContext/useFormContext";
 
 type DropdownProps = ComponentPropsWithoutRef<"select">;
 
-export default function Dropdown({ name, id, children }: DropdownProps) {
-  const [state, setState] = useState("expense");
-
-  function handleSelect(e: BaseSyntheticEvent) {
-    setState(e.target.value);
-  }
-
+export default function Dropdown(props: DropdownProps) {
+  const { selected, handleSelect } = useFormContext();
   return (
-    <select name={name} id={id} value={state} onChange={handleSelect}>
-      {children}
+    <select {...props} value={selected} onChange={handleSelect}>
+      <Options value="iverson" />
+      <Options value="boyant" />
     </select>
   );
 }

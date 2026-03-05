@@ -1,25 +1,13 @@
-import {
-  useState,
-  type BaseSyntheticEvent,
-  type ComponentPropsWithRef,
-} from "react";
+import { type ComponentPropsWithoutRef } from "react";
+import useFormContext from "../context/FormContext/useFormContext";
 
-type InputProps = ComponentPropsWithRef<"input">;
-
-export default function Input({ type, placeholder, name }: InputProps) {
-  const [state, setState] = useState("");
-
-  function handleInput(e: BaseSyntheticEvent) {
-    setState(e.target.value);
-  }
-
+export default function Input({ ...props }: ComponentPropsWithoutRef<"input">) {
+  const { input, handleChange } = useFormContext();
   return (
     <input
-      type={type}
-      placeholder={placeholder}
-      name={name}
-      onChange={(e) => handleInput(e)}
-      value={state}
+      {...props}
+      value={input[props.name as keyof input]}
+      onChange={handleChange}
     />
   );
 }
