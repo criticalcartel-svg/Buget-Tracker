@@ -1,13 +1,19 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithRef } from "react";
 import useFormContext from "../context/FormContext/useFormContext";
 
-export default function Input({ ...props }: ComponentPropsWithoutRef<"input">) {
+type InputProps = {
+  name: string;
+  lable?: string;
+} & ComponentPropsWithRef<"input">;
+
+export default function Input({ name, lable, ...props }: InputProps) {
   const { input, handleChange } = useFormContext();
+
+  const valueKey = input[name as keyof input];
   return (
-    <input
-      {...props}
-      value={input[props.name as keyof input]}
-      onChange={handleChange}
-    />
+    <>
+      {lable ? <p>{lable}</p> : null}
+      <input name={name} {...props} value={valueKey} onChange={handleChange} />
+    </>
   );
 }

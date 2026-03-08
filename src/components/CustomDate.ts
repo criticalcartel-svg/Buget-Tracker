@@ -1,9 +1,9 @@
 export default function CustomDate(date: Date, locale: string = "en-US") {
   const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    weekday: "long",
+    year: "2-digit",
+    month: "2-digit",
+    day: "2-digit",
+    // weekday: "long",
   };
 
   return new Intl.DateTimeFormat(locale, options).format(date);
@@ -16,4 +16,4 @@ function ConfiguredId() {
   const id = Math.round(date * Math.random() * Math.random());
   return id;
 }
-export const id = () => console.log(ConfiguredId());
+export const id = () => ConfiguredId();
