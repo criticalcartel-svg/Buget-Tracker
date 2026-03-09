@@ -1,8 +1,7 @@
-import { useReducer } from "react";
 import Form from "./Form";
 import Options from "./Options";
 import Select from "./Select";
-import { initialState, reducer } from "../context/Reducer";
+import useFormContext from "../context/FormContext/useFormContext";
 
 const filterByType = ["All", "Income", "Expense"];
 
@@ -19,16 +18,19 @@ const filterByCategory = [
 ];
 
 export default function Filters() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { type, category } = state;
+  const { state, dispatch } = useFormContext();
+  const { select } = state;
   return (
     <Form className="flex gap-50">
       <h2>
         <span>Type : {""}</span>
         <Select
-          value={type}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            dispatch({ type: "SET_TYPE", payload: e.target.value })
+          value={select.filterByType}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_SELECT",
+              payload: { filterByType: e.target.value },
+            })
           }
         >
           {filterByType.map((type) => (
@@ -40,9 +42,12 @@ export default function Filters() {
       <h2>
         <span>Categories : {""}</span>
         <Select
-          value={category}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            dispatch({ type: "SET_CATEGORY", payload: e.target.value })
+          value={select.filterByCategory}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_SELECT",
+              payload: { filterByCategory: e.target.value },
+            })
           }
         >
           {filterByCategory.map((category) => (

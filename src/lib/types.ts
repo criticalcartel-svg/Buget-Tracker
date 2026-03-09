@@ -1,6 +1,12 @@
-export type InputProps = { title: ""; amount: ""; date: "" };
+export type InputProps = { title: string; amount: string; date: string };
 
-export type CheckboxProps = { income: false; expense: false };
+export type CheckboxProps = { income: boolean; expense: boolean };
+
+export type SelectProps = {
+  filterByType: string;
+  filterByCategory: string;
+  category: string;
+};
 
 export type AddTransactionsProps = {
   id: number;
@@ -15,10 +21,13 @@ export type AddTransactionsProps = {
 };
 
 export type InitialStateProps = {
-  type: string;
-  category: string;
+  input: InputProps;
+  isOn: CheckboxProps;
+  select: SelectProps;
 };
 
 export type Actions =
-  | { type: "SET_TYPE"; payload: string }
-  | { type: "SET_CATEGORY"; payload: string };
+  | { type: "SET_INPUT"; payload: Partial<InputProps> }
+  | { type: "SET_CHECKED"; payload: Partial<CheckboxProps> }
+  | { type: "addTransaction"; payload: AddTransactionsProps[] }
+  | { type: "SET_SELECT"; payload: Partial<SelectProps> };

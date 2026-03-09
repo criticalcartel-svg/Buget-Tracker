@@ -1,6 +1,6 @@
 import Filters from "./components/Filters";
 import Transactions from "./components/Transactions";
-import { FormProvider } from "./context/FormContext/FormProvider";
+import FormProvider from "./context/FormContext/FormProvider";
 
 export default function App() {
   return (

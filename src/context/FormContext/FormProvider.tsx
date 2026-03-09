@@ -1,4 +1,4 @@
-import { useState } from "react";
+/*import { useState } from "react";
 import { FormContext } from "./FormContext";
 import type {
   AddTransactionsProps,
@@ -56,3 +56,13 @@ function FormProvider({ children }: { children: React.ReactNode }) {
 }
 
 export { FormProvider, FormContext };
+*/
+
+import { useReducer, type ReactNode } from "react";
+import { FormContext } from "./FormContext";
+import { initialState, reducer } from "../Reducer";
+
+export default function FormProvider({ children }: { children: ReactNode }) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return <FormContext value={{ state, dispatch }}>{children}</FormContext>;
+}
