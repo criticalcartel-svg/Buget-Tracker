@@ -1,3 +1,4 @@
+import Filters from "./components/Filters";
 import Transactions from "./components/Transactions";
 import { FormProvider } from "./context/FormContext/FormProvider";
 
@@ -6,6 +7,7 @@ export default function App() {
     <div className="bg-gray-100 center flex-col gap-4">
       <h1>App</h1>
       <FormProvider>
+        <Filters />
         <Transactions />
       </FormProvider>
     </div>

@@ -1,21 +1,10 @@
 import { useState } from "react";
 import { FormContext } from "./FormContext";
-
-export type InputProps = { title: ""; amount: ""; date: "" };
-
-export type CheckboxProps = { income: false; expense: false };
-
-export type AddTransactionsProps = {
-  id: number;
-  title: string;
-  amount: string;
-  isOn: {
-    income: boolean;
-    expense: boolean;
-  };
-  selected: string;
-  date: string;
-};
+import type {
+  AddTransactionsProps,
+  CheckboxProps,
+  InputProps,
+} from "../../lib/types";
 
 function FormProvider({ children }: { children: React.ReactNode }) {
   const [selected, setSelected] = useState("");

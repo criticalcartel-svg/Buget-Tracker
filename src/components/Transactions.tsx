@@ -5,7 +5,7 @@ import RadioButton from "./RadioButton";
 import Form from "./Form";
 import useFormContext from "../context/FormContext/useFormContext";
 import { getToday, id } from "./CustomDate";
-import type { AddTransactionsProps } from "../context/FormContext/FormProvider";
+import type { AddTransactionsProps } from "../lib/types";
 
 export default function Transactions() {
   const {
