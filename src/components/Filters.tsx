@@ -19,16 +19,16 @@ const filterByCategory = [
 
 export default function Filters() {
   const { state, dispatch } = useFormContext();
-  const { select } = state;
+  const { filters } = state;
   return (
     <Form className="flex gap-50">
       <h2>
         <span>Type : {""}</span>
         <Select
-          value={select.filterByType}
+          value={filters.filterByType}
           onChange={(e) =>
             dispatch({
-              type: "SET_SELECT",
+              type: "SET_FILTERS",
               payload: { filterByType: e.target.value },
             })
           }
@@ -42,10 +42,10 @@ export default function Filters() {
       <h2>
         <span>Categories : {""}</span>
         <Select
-          value={select.filterByCategory}
+          value={filters.filterByCategory}
           onChange={(e) =>
             dispatch({
-              type: "SET_SELECT",
+              type: "SET_FILTERS",
               payload: { filterByCategory: e.target.value },
             })
           }
