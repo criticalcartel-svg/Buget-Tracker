@@ -1,23 +1,21 @@
-import type { Actions, InitialStateProps } from "../lib/types";
+import type { Actions, AppState } from "../lib/types";
 
-export const initialState: InitialStateProps = {
+export const initialState: AppState = {
   input: {
     title: "",
     amount: "",
     date: "",
   },
-  isOn: {
-    income: false,
-    expense: false,
-  },
-  select: {
+  type: "income",
+  category: "",
+  filters: {
     filterByType: "All",
     filterByCategory: "All",
-    category: "",
   },
+  transactions: [],
 };
 
-export function reducer(state: InitialStateProps, action: Actions) {
+export function reducer(state: AppState, action: Actions): AppState {
   switch (action.type) {
     case "SET_INPUT":
       return {
@@ -25,27 +23,37 @@ export function reducer(state: InitialStateProps, action: Actions) {
         input: { ...state.input, ...action.payload },
       };
 
-    case "SET_CHECKED":
+    case "SET_TRANSACTION_TYPE":
       return {
         ...state,
-        isOn: {
-          ...state.isOn,
+        type: action.payload,
+      };
+
+    case "SET_CATEGORY":
+      return {
+        ...state,
+        category: action.payload,
+      };
+
+    case "SET_FILTERS":
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
           ...action.payload,
         },
       };
 
-    case "addTransaction":
+    case "ADD_TRANSACTIONS":
       return {
         ...state,
+        transactions: [...state.transactions, action.payload],
       };
 
-    case "SET_SELECT":
+    case "RESET":
       return {
-        ...state,
-        select: {
-          ...state.select,
-          ...action.payload,
-        },
+        ...initialState,
+        transactions: state.transactions,
       };
 
     default:

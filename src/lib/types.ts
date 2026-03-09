@@ -1,33 +1,35 @@
-export type InputProps = { title: string; amount: string; date: string };
+export type TransactionInput = { title: string; amount: string; date: string };
 
-export type CheckboxProps = { income: boolean; expense: boolean };
+export type TransactionType = "income" | "expense";
 
-export type SelectProps = {
+export type Category = string;
+
+export type Filters = {
   filterByType: string;
   filterByCategory: string;
-  category: string;
 };
 
-export type AddTransactionsProps = {
+export type Transaction = {
   id: number;
   title: string;
   amount: string;
-  isOn: {
-    income: boolean;
-    expense: boolean;
-  };
-  selected: string;
+  transactionType: string;
+  categoryType: string;
   date: string;
 };
 
-export type InitialStateProps = {
-  input: InputProps;
-  isOn: CheckboxProps;
-  select: SelectProps;
+export type AppState = {
+  input: TransactionInput;
+  type: TransactionType;
+  category: string;
+  filters: Filters;
+  transactions: Transaction[];
 };
 
 export type Actions =
-  | { type: "SET_INPUT"; payload: Partial<InputProps> }
-  | { type: "SET_CHECKED"; payload: Partial<CheckboxProps> }
-  | { type: "addTransaction"; payload: AddTransactionsProps[] }
-  | { type: "SET_SELECT"; payload: Partial<SelectProps> };
+  | { type: "SET_INPUT"; payload: Partial<TransactionInput> }
+  | { type: "SET_TRANSACTION_TYPE"; payload: TransactionType }
+  | { type: "SET_CATEGORY"; payload: Category }
+  | { type: "SET_FILTERS"; payload: Partial<Filters> }
+  | { type: "ADD_TRANSACTIONS"; payload: Transaction }
+  | { type: "RESET" };

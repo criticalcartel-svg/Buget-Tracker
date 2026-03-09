@@ -1,11 +1,11 @@
 import { type ComponentPropsWithRef } from "react";
 
-type InputProps = {
+type TransactionInput = {
   name?: string;
   lable?: string;
 } & ComponentPropsWithRef<"input">;
 
-export default function Input({ lable, ...props }: InputProps) {
+export default function Input({ lable, ...props }: TransactionInput) {
   return (
     <>
       {lable ? <p>{lable}</p> : null}

@@ -6,8 +6,9 @@ import useFormContext from "../context/FormContext/useFormContext";
 import type React from "react";
 import Select from "./Select";
 import Options from "./Options";
-// import { getToday, id } from "./CustomDate";
-// import type { AddTransactionsProps } from "../lib/types";
+import type { Transaction } from "../lib/types";
+import { getToday, id } from "./CustomDate";
+// import type { Transaction } from "../lib/types";
 
 const categoryList = [
   "Food",
@@ -22,10 +23,26 @@ const categoryList = [
 
 export default function Transactions() {
   const { state, dispatch } = useFormContext();
-  const { input, isOn, select } = state;
+  const { input, type, category } = state;
+
+  function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const newTransaction: Transaction = {
+      id: id(),
+      date: getToday(),
+      amount: input.amount,
+      title: input.title,
+      transactionType: type,
+      categoryType: category,
+    };
+
+    dispatch({ type: "ADD_TRANSACTIONS", payload: newTransaction });
+    dispatch({ type: "RESET" });
+  }
 
   return (
-    <Form className="flex flex-col gap-4">
+    <Form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <Input
         type="text"
         placeholder="Title"
@@ -44,31 +61,31 @@ export default function Transactions() {
       />
       <RadioButton
         lable="Income"
-        checked={isOn.income}
+        checked={type === "income"}
         onChange={(e) =>
           dispatch({
-            type: "SET_CHECKED",
-            payload: { income: e.target.checked },
+            type: "SET_TRANSACTION_TYPE",
+            payload: e.target.value ? "income" : "expense",
           })
         }
       />
       <RadioButton
         lable="Expense"
-        checked={isOn.expense}
+        checked={type === "expense"}
         onChange={(e) =>
           dispatch({
-            type: "SET_CHECKED",
-            payload: { expense: e.target.checked },
+            type: "SET_TRANSACTION_TYPE",
+            payload: e.target.checked ? "expense" : "income",
           })
         }
       />
 
       <Select
-        value={select.category}
+        value={category}
         onChange={(e) =>
           dispatch({
-            type: "SET_SELECT",
-            payload: { category: e.target.value },
+            type: "SET_CATEGORY",
+            payload: e.target.value,
           })
         }
       >
@@ -77,12 +94,11 @@ export default function Transactions() {
         ))}
       </Select>
 
-      {/* <Dropdown /> */}
       <Input
         type="date"
         name="date"
         value={input.date}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        onChange={(e) =>
           dispatch({ type: "SET_INPUT", payload: { date: e.target.value } })
         }
       />

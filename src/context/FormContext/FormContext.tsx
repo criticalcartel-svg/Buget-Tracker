@@ -1,22 +1,22 @@
 // import { createContext } from "react";
 // import type {
-//   AddTransactionsProps,
-//   CheckboxProps,
-//   InputProps,
+//   Transaction,
+//   TransactionType,
+//   TransactionInput,
 // } from "./FormProvider";
 
 // type FormContextProps = {
-//   input: InputProps;
+//   input: TransactionInput;
 //   selected: string;
-//   isOn: CheckboxProps;
+//   transactionType: TransactionType;
 //   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 //   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 //   handleRadioButton: (e: React.ChangeEvent<HTMLInputElement>) => void;
 //   setSelected: React.Dispatch<React.SetStateAction<string>>;
-//   setInput: React.Dispatch<React.SetStateAction<InputProps>>;
-//   setIsOn: React.Dispatch<React.SetStateAction<CheckboxProps>>;
-//   transaction: AddTransactionsProps[];
-//   setTransaction: React.Dispatch<React.SetStateAction<AddTransactionsProps[]>>;
+//   setInput: React.Dispatch<React.SetStateAction<TransactionInput>>;
+//   settransactionType: React.Dispatch<React.SetStateAction<TransactionType>>;
+//   transaction: Transaction[];
+//   setTransaction: React.Dispatch<React.SetStateAction<Transaction[]>>;
 // };
 
 // export const FormContext = createContext<FormContextProps | undefined>(
@@ -24,10 +24,10 @@
 // );
 
 import { createContext } from "react";
-import type { Actions, InitialStateProps } from "../../lib/types";
+import type { Actions, AppState } from "../../lib/types";
 
 type BugetTrackerProps = {
-  state: InitialStateProps;
+  state: AppState;
   dispatch: React.ActionDispatch<[action: Actions]>;
 };
 
