@@ -31,5 +31,6 @@ export type Actions =
   | { type: "SET_TRANSACTION_TYPE"; payload: TransactionType }
   | { type: "SET_CATEGORY"; payload: Category }
   | { type: "SET_FILTERS"; payload: Partial<Filters> }
-  | { type: "ADD_TRANSACTIONS"; payload: Transaction }
+  | { type: "ADD_TRANSACTION"; payload: Transaction }
+  | { type: "REMOVE_TRANSACTION"; payload: number }
   | { type: "RESET" };

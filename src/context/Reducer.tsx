@@ -44,10 +44,16 @@ export function reducer(state: AppState, action: Actions): AppState {
         },
       };
 
-    case "ADD_TRANSACTIONS":
+    case "ADD_TRANSACTION":
       return {
         ...state,
         transactions: [...state.transactions, action.payload],
+      };
+
+    case "REMOVE_TRANSACTION":
+      return {
+        ...state,
+        transactions: state.transactions.filter((t) => t.id !== action.payload),
       };
 
     case "RESET":

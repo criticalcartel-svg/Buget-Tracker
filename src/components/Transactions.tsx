@@ -37,7 +37,7 @@ export default function Transactions() {
       categoryType: category,
     };
 
-    dispatch({ type: "ADD_TRANSACTIONS", payload: newTransaction });
+    dispatch({ type: "ADD_TRANSACTION", payload: newTransaction });
     dispatch({ type: "RESET" });
   }
 
