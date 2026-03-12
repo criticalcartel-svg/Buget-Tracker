@@ -1,7 +1,9 @@
-import useFormContext from "../context/FormContext/useFormContext";
+import { Link } from "react-router";
+import useFormContext from "../hooks/useFormContext";
+import Button from "./atoms/Button";
 
 export default function Dashboard() {
-  const { state, dispatch } = useFormContext();
+  const { state } = useFormContext();
   const { transactions } = state;
 
   if (!transactions) {
@@ -23,33 +25,22 @@ export default function Dashboard() {
 
   return (
     <div>
-      {transactions.map((list) => (
-        <div className="flex">
-          <p>{list.title}</p>
-          <p>{list.amount}</p>
-          <p>{list.transactionType}</p>
-          <p>{list.categoryType}</p>
-          <button
-            onClick={() =>
-              dispatch({ type: "REMOVE_TRANSACTION", payload: list.id })
-            }
-          >
-            &times;
-          </button>
-          <p>
-            <span>Income : </span>
-            {totalIncome}
-          </p>
-          <p>
-            <span>Expense : </span>
-            {totalExpense}
-          </p>
-          <p>
-            <span>Total : </span>
-            {totalTransactions}
-          </p>
-        </div>
-      ))}
+      <p>
+        <span>Income : </span>
+        {totalIncome}
+      </p>
+      <p>
+        <span>Expense : </span>
+        {totalExpense}
+      </p>
+      <p>
+        <span>Total : </span>
+        {totalTransactions}
+      </p>
+
+      <Link to="/transactions">
+        <Button types="secondary"> Transactions </Button>
+      </Link>
     </div>
   );
 }

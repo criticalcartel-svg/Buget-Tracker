@@ -5,8 +5,8 @@ export type TransactionType = "income" | "expense";
 export type Category = string;
 
 export type Filters = {
-  filterByType: string;
-  filterByCategory: string;
+  type: string;
+  category: string;
 };
 
 export type Transaction = {
@@ -33,4 +33,5 @@ export type Actions =
   | { type: "SET_FILTERS"; payload: Partial<Filters> }
   | { type: "ADD_TRANSACTION"; payload: Transaction }
   | { type: "REMOVE_TRANSACTION"; payload: number }
+  | { type: "UPDATE_TRANSACTION"; payload: number }
   | { type: "RESET" };

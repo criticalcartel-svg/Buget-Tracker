@@ -1,7 +1,7 @@
-import Form from "./Form";
-import Options from "./Options";
-import Select from "./Select";
-import useFormContext from "../context/FormContext/useFormContext";
+import Form from "./atoms/Form";
+import Options from "./atoms/Options";
+import Select from "./atoms/Select";
+import useFormContext from "../hooks/useFormContext";
 
 const filterByType = ["All", "Income", "Expense"];
 
@@ -25,11 +25,11 @@ export default function Filters() {
       <h2>
         <span>Type : {""}</span>
         <Select
-          value={filters.filterByType}
+          value={filters.type}
           onChange={(e) =>
             dispatch({
               type: "SET_FILTERS",
-              payload: { filterByType: e.target.value },
+              payload: { type: e.target.value },
             })
           }
         >
@@ -42,11 +42,11 @@ export default function Filters() {
       <h2>
         <span>Categories : {""}</span>
         <Select
-          value={filters.filterByCategory}
+          value={filters.category}
           onChange={(e) =>
             dispatch({
               type: "SET_FILTERS",
-              payload: { filterByCategory: e.target.value },
+              payload: { category: e.target.value },
             })
           }
         >

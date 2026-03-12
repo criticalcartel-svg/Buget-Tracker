@@ -1,9 +1,9 @@
 import { useEffect, useReducer, type ReactNode } from "react";
 import { FormContext } from "./FormContext";
-import { initialState, reducer } from "../Reducer";
+import rootReducer, { initialState } from "../reducers/rootReducer";
 
 export default function FormProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, initialState, (initial) => {
+  const [state, dispatch] = useReducer(rootReducer, initialState, (initial) => {
     try {
       const savedTransaction = localStorage.getItem("transactions");
       return savedTransaction ? JSON.parse(savedTransaction) : initial;

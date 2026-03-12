@@ -1,14 +1,13 @@
-import Input from "./Input";
-import Button from "./Button";
-import RadioButton from "./RadioButton";
-import Form from "./Form";
-import useFormContext from "../context/FormContext/useFormContext";
+import Input from "../components/atoms/Input";
+import Button from "../components/atoms/Button";
+import RadioButton from "../components/atoms/RadioButton";
+import Form from "../components/atoms/Form";
+import useFormContext from "../hooks/useFormContext";
 import type React from "react";
-import Select from "./Select";
-import Options from "./Options";
+import Select from "../components/atoms/Select";
+import Options from "../components/atoms/Options";
 import type { Transaction } from "../lib/types";
-import { getToday, id } from "./CustomDate";
-// import type { Transaction } from "../lib/types";
+import { getToday, id } from "../lib/CustomDate";
 
 const categoryList = [
   "Food",
@@ -21,16 +20,18 @@ const categoryList = [
   "Others",
 ];
 
-export default function Transactions() {
+export default function TransactionForm() {
   const { state, dispatch } = useFormContext();
   const { input, type, category } = state;
 
   function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    if (!input.title || !input.amount) return;
+
     const newTransaction: Transaction = {
       id: id(),
-      date: getToday(),
+      date: input.date || getToday(),
       amount: input.amount,
       title: input.title,
       transactionType: type,
@@ -102,7 +103,7 @@ export default function Transactions() {
           dispatch({ type: "SET_INPUT", payload: { date: e.target.value } })
         }
       />
-      <Button> Add </Button>
+      <Button types="primary"> Add </Button>
     </Form>
   );
 }

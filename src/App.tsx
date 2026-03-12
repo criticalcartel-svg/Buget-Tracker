@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import Dashboard from "./components/Dashboard";
-import Filters from "./components/Filters";
-import Transactions from "./components/Transactions";
-import FormProvider from "./context/FormContext/FormProvider";
+import FormProvider from "./context/FormProvider";
 import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
+import TransactionForm from "./pages/TransactionForm";
+import TransactionList from "./pages/Transactions";
 
 export default function App() {
   return (
@@ -14,8 +14,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/add" element={<Transactions />} />
-            <Route path="/filters" element={<Filters />} />
+            <Route path="/add" element={<TransactionForm />} />
+            <Route path="/transactions" element={<TransactionList />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

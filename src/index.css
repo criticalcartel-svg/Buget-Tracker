@@ -4,4 +4,10 @@
   .center {
     @apply flex h-screen justify-center items-center;
   }
+  .primary {
+    @apply bg-blue-400 font-medium text-white;
+  }
+  .secondary {
+    @apply font-medium border border-gray-600;
+  }
 }
